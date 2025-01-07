@@ -1,9 +1,6 @@
 ﻿[edtCity]
 Coordinates=10,230,55,58
 
-[btnExclude]
-Coordinates=430,80,78,58
-
 [lblCPF]
 Coordinates=1040,10,53,58
 
@@ -65,9 +62,6 @@ Coordinates=396,10,65,58
 [edtState]
 Coordinates=553,10,63,58
 
-[btnAdd]
-Coordinates=580,150,55,58
-
 [pnlPhone]
 Coordinates=780,80,69,58
 
@@ -117,7 +111,7 @@ Coordinates=236,10,91,146
 Coordinates=113,10,113,146
 
 []
-Coordinates=661,562,91,36
+Coordinates=430,80,78,58
 
 [pnlBtns]
 Coordinates=820,150,55,58

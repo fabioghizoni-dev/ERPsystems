@@ -32,7 +32,6 @@ object DM: TDM
     object clientesid_cliente: TIntegerField
       FieldName = 'id_cliente'
       Origin = 'id_cliente'
-      ReadOnly = True
     end
     object clientesnome_cliente: TWideStringField
       FieldName = 'nome_cliente'
@@ -42,51 +41,16 @@ object DM: TDM
     object clientescpf_cliente: TWideStringField
       FieldName = 'cpf_cliente'
       Origin = 'cpf_cliente'
-      ReadOnly = True
       Size = 8190
     end
     object clientescelular_cliente: TWideStringField
       FieldName = 'celular_cliente'
       Origin = 'celular_cliente'
-      ReadOnly = True
       Size = 8190
     end
     object clientesdata_adicionado: TDateField
       FieldName = 'data_adicionado'
       Origin = 'data_adicionado'
-    end
-  end
-  object endereco: TFDTable
-    Active = True
-    IndexFieldNames = 'nome_cliente_identify'
-    Connection = ConnDbERP
-    ResourceOptions.AssignedValues = [rvEscapeExpand]
-    TableName = 'endereco'
-    Left = 232
-    Top = 183
-    object endereconome_cliente_identify: TIntegerField
-      FieldName = 'nome_cliente_identify'
-      Origin = 'nome_cliente_identify'
-    end
-    object enderecopais_cliente: TWideStringField
-      FieldName = 'pais_cliente'
-      Origin = 'pais_cliente'
-      Size = 8190
-    end
-    object enderecoestado_cliente: TWideStringField
-      FieldName = 'estado_cliente'
-      Origin = 'estado_cliente'
-      Size = 8190
-    end
-    object enderecocidade_cliente: TWideStringField
-      FieldName = 'cidade_cliente'
-      Origin = 'cidade_cliente'
-      Size = 8190
-    end
-    object enderecobairro_cliente: TWideStringField
-      FieldName = 'bairro_cliente'
-      Origin = 'bairro_cliente'
-      Size = 8190
     end
   end
   object produtos: TFDTable
@@ -169,5 +133,42 @@ object DM: TDM
     DataSet = vendas
     Left = 357
     Top = 241
+  end
+  object endereco: TFDTable
+    Active = True
+    Connection = ConnDbERP
+    ResourceOptions.AssignedValues = [rvEscapeExpand]
+    TableName = 'endereco'
+    Left = 232
+    Top = 184
+    object enderecopais_cliente: TWideStringField
+      FieldName = 'pais_cliente'
+      Origin = 'pais_cliente'
+      Size = 8190
+    end
+    object enderecoestado_cliente: TWideStringField
+      FieldName = 'estado_cliente'
+      Origin = 'estado_cliente'
+      Size = 8190
+    end
+    object enderecocidade_cliente: TWideStringField
+      FieldName = 'cidade_cliente'
+      Origin = 'cidade_cliente'
+      Size = 8190
+    end
+    object enderecobairro_cliente: TWideStringField
+      FieldName = 'bairro_cliente'
+      Origin = 'bairro_cliente'
+      Size = 8190
+    end
+    object enderecoid_cliente_end: TIntegerField
+      FieldName = 'id_cliente_end'
+      Origin = 'id_cliente_end'
+    end
+    object endereconome_cliente: TWideStringField
+      FieldName = 'nome_cliente'
+      Origin = 'nome_cliente'
+      Size = 8190
+    end
   end
 end

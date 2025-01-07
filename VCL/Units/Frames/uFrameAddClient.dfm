@@ -32,6 +32,8 @@ object frameAddClient: TframeAddClient
       Color = 16580327
       ParentBackground = False
       TabOrder = 0
+      ExplicitLeft = 46
+      ExplicitTop = 133
       object pnlLbls: TPanel
         Left = 0
         Top = 0
@@ -514,7 +516,6 @@ object frameAddClient: TframeAddClient
           Top = 0
           Width = 263
           Height = 41
-          Cursor = crHandPoint
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
@@ -522,30 +523,32 @@ object frameAddClient: TframeAddClient
           Align = alRight
           Caption = 'Adicionar'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = 6845186
-          Font.Height = -24
+          Font.Color = clBlack
+          Font.Height = -21
           Font.Name = 'Roboto Cn'
           Font.Style = []
           ParentFont = False
           TabOrder = 0
           OnClick = btnAddClick
+          ExplicitLeft = 352
+          ExplicitTop = 8
         end
         object btnExclude: TButton
           Left = 0
           Top = 0
-          Width = 269
+          Width = 263
           Height = 41
-          Cursor = crHandPoint
           Align = alLeft
           Caption = 'Excluir'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = 6845186
-          Font.Height = -24
+          Font.Color = clWindowText
+          Font.Height = -21
           Font.Name = 'Roboto Cn'
           Font.Style = []
           ParentFont = False
           TabOrder = 1
           OnClick = btnExcludeClick
+          ExplicitLeft = -25
         end
       end
     end

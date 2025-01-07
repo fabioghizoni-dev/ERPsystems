@@ -3,17 +3,48 @@ unit uMain;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  Vcl.ExtCtrls, System.ImageList, Vcl.ImgList, Vcl.Buttons, Vcl.StdCtrls,
-  Vcl.Imaging.pngimage, uFrameAddClient, uFrameAddProduct, uFrameStock, Data.DB,
-  Vcl.Grids, Vcl.DBGrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.UI.Intf,
-  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.PG,
-  FireDAC.Phys.PGDef, FireDAC.VCLUI.Wait, FireDAC.Comp.Client,
-  FireDAC.Comp.DataSet, frCoreClasses, frxClass, Vcl.Menus, IPPeerClient,
-  IPPeerServer, System.Tether.Manager, Vcl.Mask;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  System.ImageList,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.ExtCtrls,
+  Vcl.ImgList,
+  Vcl.Buttons,
+  Vcl.StdCtrls,
+  Vcl.Imaging.pngimage,
+  uFrameAddClient,
+  uFrameAddProduct,
+  uFrameStock,
+  Data.DB,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Stan.Async,
+  FireDAC.DApt,
+  FireDAC.UI.Intf,
+  FireDAC.Stan.Def,
+  FireDAC.Stan.Pool,
+  FireDAC.Phys,
+  FireDAC.Phys.PG,
+  FireDAC.Phys.PGDef,
+  FireDAC.VCLUI.Wait,
+  FireDAC.Comp.Client,
+  FireDAC.Comp.DataSet,
+  Vcl.Menus,
+  Vcl.Mask,
+  Vcl.Themes;
 
 type
   TfrmMain = class(TForm)
@@ -65,10 +96,9 @@ type
     procedure dbGrid2CellClick(Column: TColumn);
     procedure btnConfigClick(Sender: TObject);
     procedure dbGridCellClick(Column: TColumn);
-    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
-      MousePos: TPoint; var Handled: Boolean);
-    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
-      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+    procedure FormDestroy(Sender: TObject);
   private
     procedure KeysDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     { Private declarations }
@@ -84,9 +114,13 @@ implementation
 {$R *.dfm}
 
 uses
-  uDM, uConf;
+  uDM,
+  uConf,
+  IniFiles;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
+var
+  ini: TIniFile;
 begin
 
   frameStockMain.edtID.Text := 'Nulo';
@@ -154,8 +188,7 @@ begin
 
     while not qry.Eof do
     begin
-      frameStockMain.combo.Items.AddObject(qry.FieldByName('nome_produto').AsString,
-      TObject(qry.FieldByName('id_produto').AsInteger));
+      frameStockMain.combo.Items.AddObject(qry.FieldByName('nome_produto').AsString, TObject(qry.FieldByName('id_produto').AsInteger));
       qry.Next;
     end;
 
@@ -228,31 +261,120 @@ end;
 
 procedure TfrmMain.btnSyncClick(Sender: TObject);
 begin
-  DM.ConnDbERP.RefreshMetadataCache;
+  DM.clientes.RefreshMetadata;
+  DM.endereco.RefreshMetadata;
+  DM.produtos.RefreshMetadata;
+  dbGrid.Refresh;
+  dbGrid2.Refresh;
 end;
 
 procedure TfrmMain.dbGridCellClick(Column: TColumn);
 var
-  edtName:
-  TEdit;
-  maskCPF,
-  maskPhone:
-  TMaskEdit;
-  ds:
-  TDataSet;
+  edtName, edtState, edtCity, edtDistrict: TEdit;
+  maskCPF, maskPhone: TMaskEdit;
+  ds, ds2: TDataSet;
+  qry: TFDQuery;
 begin
 
-  if frameAddClientMain.Visible = true then
-  begin
+  try
 
-    edtName := frameAddClientMain.edtName;
-    maskCPF := frameAddClientMain.maskCPF;
-    maskPhone := frameAddClientMain.maskPhone;
-    ds := dbGrid.DataSource.DataSet;
+    if frameAddClientMain.Visible = true then
+    begin
 
-    edtName.Text := ds.FieldByName('nome_cliente').AsString;
-    maskCPF.Text := ds.FieldByName('cpf_cliente').AsString;
-    maskPhone.Text := ds.FieldByName('celular_cliente').AsString;
+      edtName := frameAddClientMain.edtName;
+      maskCPF := frameAddClientMain.maskCPF;
+      maskPhone := frameAddClientMain.maskPhone;
+      edtState := frameAddClientMain.edtState;
+      edtCity := frameAddClientMain.edtCity;
+      edtDistrict := frameAddClientMain.edtDistrict;
+      ds := dbGrid.DataSource.DataSet;
+      ds2 := DM.dtSrc2.DataSet;
+
+      edtName.Text := ds.FieldByName('nome_cliente').AsString;
+      maskCPF.Text := ds.FieldByName('cpf_cliente').AsString;
+      maskPhone.Text := ds.FieldByName('celular_cliente').AsString;
+
+      qry := TFDQuery.Create(nil);
+      if DM.ConnDbERP.Connected = True then
+      begin
+
+        qry.Connection := DM.ConnDbERP;
+
+        DM.clientes.Connection := DM.ConnDbERP;
+        DM.dtSrc.DataSet := DM.clientes;
+        DM.endereco.Connection := DM.ConnDbERP;
+        DM.dtSrc2.DataSet := DM.endereco;
+        DM.produtos.Connection := DM.ConnDbERP;
+        DM.dtSrc3.DataSet := DM.produtos;
+        DM.vendas.Connection := DM.ConnDbERP;
+        DM.dtSrc4.DataSet := DM.vendas;
+
+        DM.clientes.Active := True;
+        DM.endereco.Active := True;
+        DM.produtos.Active := True;
+        DM.vendas.Active := True;
+
+      end
+      else
+      begin
+
+        DM.ConnDbERP.Connected := True;
+        DM.clientes.Connection := DM.ConnDbERP;
+        DM.endereco.Connection := DM.ConnDbERP;
+        DM.produtos.Connection := DM.ConnDbERP;
+        DM.vendas.Connection := DM.ConnDbERP;
+
+        DM.clientes.Active := True;
+        DM.endereco.Active := True;
+        DM.produtos.Active := True;
+        DM.vendas.Active := True;
+
+      end;
+
+      qry.SQL.Text := 'SELECT estado_cliente, cidade_cliente, bairro_cliente FROM endereco ' + 'WHERE id_cliente_end = :idCliente AND nome_cliente = :nomeCliente';
+
+      qry.ParamByName('idCliente').AsInteger := ds.FieldByName('id_cliente').AsInteger;
+      qry.ParamByName('nomeCliente').AsString := ds.FieldByName('nome_cliente').AsString;
+
+      qry.Open;
+
+      if not qry.IsEmpty then
+      begin
+
+        if not (ds2 = nil) then
+        begin
+
+          edtState.Text := ds2.FieldByName('estado_cliente').AsString;
+          edtCity.Text := ds2.FieldByName('cidade_cliente').AsString;
+          edtDistrict.Text := ds2.FieldByName('bairro_cliente').AsString;
+
+        end
+        else
+        begin
+
+          if DM.ConnDbERP.Connected = True then
+          begin
+            ds.DataSource.DataSet := DM.endereco;
+          end
+          else
+          begin
+            DM.ConnDbERP.Connected := True;
+            ds.DataSource.DataSet := DM.endereco;
+
+            edtState.Text := ds2.FieldByName('estado_cliente').AsString;
+            edtCity.Text := ds2.FieldByName('cidade_cliente').AsString;
+            edtDistrict.Text := ds2.FieldByName('bairro_cliente').AsString;
+          end;
+
+        end;
+
+      end
+      else
+        ShowMessage('Cliente não registrou o endereço!');
+
+    end;
+
+  finally
 
   end;
 
@@ -260,13 +382,8 @@ end;
 
 procedure TfrmMain.dbGrid2CellClick(Column: TColumn);
 var
-  edtProduct,
-  edtAmount,
-  edtCod,
-  edtPrice:
-  TEdit;
-  ds:
-  TDataSet;
+  edtProduct, edtAmount, edtCod, edtPrice: TEdit;
+  ds: TDataSet;
 begin
 
   ds := dbGrid2.DataSource.DataSet;
@@ -314,8 +431,7 @@ begin
 
 end;
 
-procedure TfrmMain.FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
-  MousePos: TPoint; var Handled: Boolean);
+procedure TfrmMain.FormMouseWheelUp(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
 begin
 
 //  if frameAddClientMain.Visible = True then
@@ -330,8 +446,7 @@ begin
 
 end;
 
-procedure TfrmMain.FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
-  MousePos: TPoint; var Handled: Boolean);
+procedure TfrmMain.FormMouseWheelDown(Sender: TObject; Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
 begin
 
 //  if frameAddClientMain.Visible = True then
@@ -359,6 +474,13 @@ end;
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 //
+end;
+
+procedure TfrmMain.FormDestroy(Sender: TObject);
+begin
+  FreeAndNil(dbGrid);
+  FreeAndNil(dbGrid2);
+  Free;
 end;
 
 end.

@@ -8,7 +8,8 @@ uses
   Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Data.DB;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Data.DB,
+  Vcl.ButtonStylesAttributes, Vcl.StyledButton;
 
 type
   TframeAddClient = class(TFrame)
@@ -37,7 +38,6 @@ type
     pnlName: TPanel;
     pnlEdtState: TPanel;
     pnlTitle: TPanel;
-    btnAdd: TButton;
     pnlLbls4: TPanel;
     pnl5: TPanel;
     lblMemo: TLabel;
@@ -45,14 +45,15 @@ type
     check: TCheckBox;
     check2: TCheckBox;
     pnlBtns: TPanel;
-    btnExclude: TButton;
     checkPadrao: TCheckBox;
+    btnAdd: TButton;
+    btnExclude: TButton;
     procedure btnAddClick(Sender: TObject);
     procedure checkClick(Sender: TObject);
     procedure check2Click(Sender: TObject);
-    procedure btnExcludeClick(Sender: TObject);
     procedure maskCPFExit(Sender: TObject);
     procedure checkPadraoClick(Sender: TObject);
+    procedure btnExcludeClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -139,6 +140,51 @@ begin
   end;
 end;
 
+procedure TframeAddClient.maskCPFExit(Sender: TObject);
+var
+  rawCPF:
+  String;
+begin
+
+  rawCPF := StringReplace(maskCPF.Text, '.', '', [rfReplaceAll]);
+  rawCPF := StringReplace(rawCPF, '-', '', [rfReplaceAll]);
+
+  if IsValidCPF(rawCPF) = True then
+  begin
+
+    ShowMessage('Campo CPF Válido!');
+
+  end
+  else
+  begin
+
+    ShowMessage('Campo CPF Inválido!');
+
+  end;
+
+end;
+
+procedure TframeAddClient.btnExcludeClick(Sender: TObject);
+var
+  ds: TDataSet;
+begin
+
+  ds := frmMain.dbGrid.DataSource.DataSet;
+
+  if not ds.IsEmpty then
+  begin
+    ds.Delete;
+    ShowMessage('Cliente excluído com sucesso.');
+    edtName.Text := EmptyStr;
+    edtState.Text := EmptyStr;
+    edtCity.Text := EmptyStr;
+    edtDistrict.Text := EmptyStr;
+    maskCPF.Text := EmptyStr;
+    maskPhone.Text := EmptyStr;
+  end;
+
+end;
+
 procedure TframeAddClient.btnAddClick(Sender: TObject);
 var
   qry: TFDQuery;
@@ -214,51 +260,6 @@ begin
 
     FreeAndNil(qry);
 
-  end;
-
-end;
-
-procedure TframeAddClient.maskCPFExit(Sender: TObject);
-var
-  rawCPF:
-  String;
-begin
-
-  rawCPF := StringReplace(maskCPF.Text, '.', '', [rfReplaceAll]);
-  rawCPF := StringReplace(rawCPF, '-', '', [rfReplaceAll]);
-
-  if IsValidCPF(rawCPF) = True then
-  begin
-
-    ShowMessage('Campo CPF Válido!');
-
-  end
-  else
-  begin
-
-    ShowMessage('Campo CPF Inválido!');
-
-  end;
-
-end;
-
-procedure TframeAddClient.btnExcludeClick(Sender: TObject);
-var
-  ds: TDataSet;
-begin
-
-  ds := frmMain.dbGrid.DataSource.DataSet;
-
-  if not ds.IsEmpty then
-  begin
-    ds.Delete;
-    ShowMessage('Cliente excluído com sucesso.');
-    edtName.Text := EmptyStr;
-    edtState.Text := EmptyStr;
-    edtCity.Text := EmptyStr;
-    edtDistrict.Text := EmptyStr;
-    maskCPF.Text := EmptyStr;
-    maskPhone.Text := EmptyStr;
   end;
 
 end;

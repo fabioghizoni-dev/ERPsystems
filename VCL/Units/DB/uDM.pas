@@ -15,25 +15,14 @@ type
     DriverPG: TFDPhysPgDriverLink;
     ConnDbERP: TFDConnection;
     clientes: TFDTable;
-    endereco: TFDTable;
     produtos: TFDTable;
     dtSrc: TDataSource;
     dtSrc2: TDataSource;
     dtSrc3: TDataSource;
-    endereconome_cliente_identify: TIntegerField;
-    enderecopais_cliente: TWideStringField;
-    enderecoestado_cliente: TWideStringField;
-    enderecocidade_cliente: TWideStringField;
-    enderecobairro_cliente: TWideStringField;
     produtosid_produto: TIntegerField;
     produtosnome_produto: TWideStringField;
     produtospreco_unitario: TCurrencyField;
     produtosqntd_estoque: TIntegerField;
-    clientesid_cliente: TIntegerField;
-    clientesnome_cliente: TWideStringField;
-    clientescpf_cliente: TWideStringField;
-    clientescelular_cliente: TWideStringField;
-    clientesdata_adicionado: TDateField;
     vendas: TFDTable;
     vendasnome_vendedor: TWideStringField;
     vendasnome_prod_vendido: TWideStringField;
@@ -42,6 +31,18 @@ type
     vendaspreco_prod: TCurrencyField;
     vendasqntd_vendida: TIntegerField;
     dtSrc4: TDataSource;
+    clientesid_cliente: TIntegerField;
+    clientesnome_cliente: TWideStringField;
+    clientescpf_cliente: TWideStringField;
+    clientescelular_cliente: TWideStringField;
+    clientesdata_adicionado: TDateField;
+    endereco: TFDTable;
+    enderecopais_cliente: TWideStringField;
+    enderecoestado_cliente: TWideStringField;
+    enderecocidade_cliente: TWideStringField;
+    enderecobairro_cliente: TWideStringField;
+    enderecoid_cliente_end: TIntegerField;
+    endereconome_cliente: TWideStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

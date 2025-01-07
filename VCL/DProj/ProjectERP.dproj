@@ -58,6 +58,7 @@
         <Cfg_2>true</Cfg_2>
         <Base>true</Base>
     </PropertyGroup>
+    <Import Project="..\ConfigVCL.optset" Condition="'$(Base)'!='' And Exists('..\ConfigVCL.optset')"/>
     <PropertyGroup Condition="'$(Base)'!=''">
         <DCC_DcuOutput>..\Units\Dcus\$(Platform)$(Config)\</DCC_DcuOutput>
         <DCC_ExeOutput>..\Exe\$(Platform)$(Config)\</DCC_ExeOutput>
@@ -66,14 +67,12 @@
         <DCC_S>false</DCC_S>
         <DCC_F>false</DCC_F>
         <DCC_K>false</DCC_K>
-        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <SanitizedProjectName>ProjectERP</SanitizedProjectName>
         <BRCC_OutputDir>.\Res\$(Platform)$(Config)\</BRCC_OutputDir>
-        <VerInfo_Locale>1046</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <CfgDependentOn>..\ConfigVCL.optset</CfgDependentOn>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>soapserver;FireDACIBDriver;vclwinx;fs29;fmx;vclie;DbxCommonDriver;bindengine;IndyIPCommon;VCLRESTComponents;FireDACCommonODBC;appanalytics;IndyProtocols;vclx;Skia.Package.RTL;dbxcds;vcledge;frLanguageSlovak29;frLanguageHungarian29;JvAppFrm;FireDACSqliteDriver;DbxClientDriver;JclVcl;soapmidas;frLanguageArabic29;frCoreLibrary29;Jcl;dbexpress;JvManagedThreads;frLanguageCatalon29;frLanguageBrazil29;frLanguageCzech29;inet;AsyncProDR;vcltouch;JvDB;fmxdae;SysToolsDR;JvCustom;CustomIPTransport;JvSystem;EssentialsDR;C4DWizard;JvControls;frLanguageItalian29;JvCrypt;frLanguageSwiss29;JvJans;JvMM;IndySystem;frxe29;frLanguageSwedish29;JvGlobus;VirtualTreesR;JclContainers;fsDB29;frLanguageUkrainian29;JvPageComps;vclFireDAC;FireDACCommon;DelphiAIDeveloper;frLanguageDanish29;DOSCommandDR;bindcompdbx;rtl;FireDACMySQLDriver;StyledAnimatedComponents;frLanguageLithuanian29;frce;DBXSqliteDriver;frLanguageFrench29;frLanguageRussian29;JvRuntimeDesign;JvXPCtrls;vclimg;inetdbxpress;FireDAC;JvDocking;JvDlgs;xmlrtl;dsnap;JvCmp;frLanguageSerbian29;frLanguageFarsi29;fmxobj;bindcompvclsmp;frx29;frLanguageChinese29;frLanguageHebrew29;frxDB29;frLocalizationLibrary29;FireDACCommonDriver;IndyIPClient;bindcompvclwinx;frLanguageTaiwan29;bindcompfmx;SysToolsDBDR;frLanguageRomanian29;frLanguageGerman29;JvBands;inetdb;frLanguageIndonesian29;frLanguageBrazil229;vclactnband;fmxFireDAC;frLanguageCroatian29;DBXMySQLDriver;VclSmp;JvPascalInterpreter;fmxase;JvPluginSystem;JvTimeFramework;dbrtl;Skia.Package.FMX;FireDACMSAccDriver;frLanguageSlovene29;AbbreviaVCLD;JclDeveloperTools;frLanguageTurkish29;vcldsnap;DBXInterBaseDriver;frLanguageGreek29;JvWizards;Skia.Package.VCL;frLanguageBrazil129;vcldb;StyledComponents;SynEditDR;JvCore;bindcomp;frLanguageLatvian29;IndyCore;RESTBackendComponents;frLanguageSpanish29;frLanguageJapanese29;FireDACADSDriver;RaizeComponentsVclDb;RESTComponents;IndyIPServer;vcl;dsnapxml;adortl;dsnapcon;JvDotNetCtrls;JvHMI;frLanguageDutch29;FireDACPgDriver;JvPrintPreview;frLanguagePortuguese29;tethering;JvStdCtrls;frLanguageBulgarian29;frLanguagePolish29;bindcompvcl;CloudService;soaprtl;RaizeComponentsVcl;JvNet;VirtualTreesDR;$(DCC_UsePackage)</DCC_UsePackage>
@@ -83,15 +82,20 @@
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <Icns_MainIcns>$(ProjectName).Artwork\Windows\AppIcon.icns</Icns_MainIcns>
+        <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
     </PropertyGroup>
+    <Import Project="..\ConfigVCL.optset" Condition="'$(Base_Win64)'!='' And Exists('..\ConfigVCL.optset')"/>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <DCC_UsePackage>soapserver;FireDACIBDriver;vclwinx;fs29;fmx;vclie;DbxCommonDriver;bindengine;IndyIPCommon;VCLRESTComponents;FireDACCommonODBC;appanalytics;IndyProtocols;vclx;dbxcds;vcledge;frLanguageSlovak29;frLanguageHungarian29;FireDACSqliteDriver;DbxClientDriver;soapmidas;frLanguageArabic29;frCoreLibrary29;dbexpress;frLanguageCatalon29;frLanguageBrazil29;frLanguageCzech29;inet;AsyncProDR;vcltouch;fmxdae;SysToolsDR;CustomIPTransport;EssentialsDR;frLanguageItalian29;frLanguageSwiss29;IndySystem;frxe29;frLanguageSwedish29;VirtualTreesR;fsDB29;frLanguageUkrainian29;vclFireDAC;FireDACCommon;frLanguageDanish29;DOSCommandDR;bindcompdbx;rtl;FireDACMySQLDriver;StyledAnimatedComponents;frLanguageLithuanian29;DBXSqliteDriver;frLanguageFrench29;frLanguageRussian29;vclimg;inetdbxpress;FireDAC;xmlrtl;dsnap;frLanguageSerbian29;frLanguageFarsi29;fmxobj;bindcompvclsmp;frx29;frLanguageChinese29;frLanguageHebrew29;frxDB29;frLocalizationLibrary29;FireDACCommonDriver;IndyIPClient;bindcompvclwinx;frLanguageTaiwan29;bindcompfmx;SysToolsDBDR;frLanguageRomanian29;frLanguageGerman29;inetdb;frLanguageIndonesian29;frLanguageBrazil229;vclactnband;fmxFireDAC;frLanguageCroatian29;DBXMySQLDriver;VclSmp;fmxase;dbrtl;FireDACMSAccDriver;frLanguageSlovene29;AbbreviaVCLD;frLanguageTurkish29;vcldsnap;DBXInterBaseDriver;frLanguageGreek29;Skia.Package.VCL;frLanguageBrazil129;vcldb;StyledComponents;SynEditDR;bindcomp;frLanguageLatvian29;IndyCore;RESTBackendComponents;frLanguageSpanish29;frLanguageJapanese29;FireDACADSDriver;RaizeComponentsVclDb;RESTComponents;IndyIPServer;vcl;dsnapxml;adortl;dsnapcon;frLanguageDutch29;FireDACPgDriver;frLanguagePortuguese29;tethering;frLanguageBulgarian29;frLanguagePolish29;bindcompvcl;CloudService;soaprtl;RaizeComponentsVcl;VirtualTreesDR;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
+        <Icns_MainIcns>$(ProjectName).Artwork\Windows\AppIcon.icns</Icns_MainIcns>
+        <CfgDependentOn>..\ConfigVCL.optset</CfgDependentOn>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -160,6 +164,7 @@
         </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
+            <DependentOn>..\ConfigVCL.optset</DependentOn>
         </BuildConfiguration>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_1</Key>
@@ -184,9 +189,42 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png" Configuration="Debug" Class="UWP_DelphiLogo150">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo150x150.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png" Configuration="Debug" Class="UWP_DelphiLogo150">
+                    <Platform Name="Win64">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo150x150.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo44x44.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                    <Platform Name="Win64">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo44x44.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="..\Exe\Win32Debug\ProjectERP.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName="..\Exe\Win32Debug\ProjectERP.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>ProjectERP.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="..\Exe\Win64Debug\ProjectERP.exe" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName="..\Exe\Win64Debug\ProjectERP.rsm" Configuration="Debug" Class="DebugSymbols"/>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>
