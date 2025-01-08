@@ -14,6 +14,7 @@ object frmVenda: TfrmVenda
   KeyPreview = True
   Position = poScreenCenter
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   TextHeight = 15
   object pnlClient: TPanel
     Left = 0
@@ -57,12 +58,11 @@ object frmVenda: TfrmVenda
         ParentBackground = False
         TabOrder = 0
         object lblCodProd: TLabel
-          AlignWithMargins = True
-          Left = 233
+          Left = 0
           Top = 0
           Width = 72
           Height = 25
-          Margins.Left = 128
+          Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
           Margins.Bottom = 0
@@ -104,11 +104,11 @@ object frmVenda: TfrmVenda
           AlignWithMargins = True
           Left = 369
           Top = 0
-          Width = 194
+          Width = 119
           Height = 25
-          Margins.Left = 64
+          Margins.Left = 118
           Margins.Top = 0
-          Margins.Right = 80
+          Margins.Right = 155
           Margins.Bottom = 0
           Align = alClient
           Caption = 'Nome do Produto:'
@@ -123,10 +123,15 @@ object frmVenda: TfrmVenda
           ExplicitHeight = 19
         end
         object lblName: TLabel
-          Left = 0
+          AlignWithMargins = True
+          Left = 146
           Top = 0
           Width = 105
           Height = 25
+          Margins.Left = 74
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
           Align = alLeft
           Caption = 'Nome Vendedor:'
           Font.Charset = DEFAULT_CHARSET
@@ -159,6 +164,7 @@ object frmVenda: TfrmVenda
           Top = 0
           Width = 100
           Height = 41
+          Cursor = crHandPoint
           Align = alRight
           Caption = 'Concluir Venda'
           TabOrder = 0
@@ -170,6 +176,7 @@ object frmVenda: TfrmVenda
           Top = 0
           Width = 100
           Height = 41
+          Cursor = crHandPoint
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 5
@@ -223,12 +230,11 @@ object frmVenda: TfrmVenda
           end
         end
         object pnlLeft: TPanel
-          AlignWithMargins = True
-          Left = 233
+          Left = 0
           Top = 0
           Width = 106
           Height = 41
-          Margins.Left = 40
+          Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
           Margins.Bottom = 0
@@ -245,8 +251,11 @@ object frmVenda: TfrmVenda
             Width = 96
             Height = 26
             Align = alClient
-            MaxLength = 10
+            MaxLength = 9
+            NumbersOnly = True
             TabOrder = 0
+            OnChange = edtCodProdChange
+            OnExit = edtCodProdExit
             ExplicitHeight = 23
           end
         end
@@ -268,14 +277,22 @@ object frmVenda: TfrmVenda
             Height = 26
             Align = alClient
             TabOrder = 0
+            OnChange = edtPriceChange
+            OnClick = edtPriceClick
+            OnEnter = edtPriceEnter
             ExplicitHeight = 23
           end
         end
         object pnlName: TPanel
-          Left = 0
+          AlignWithMargins = True
+          Left = 146
           Top = 0
           Width = 193
           Height = 41
+          Margins.Left = 40
+          Margins.Top = 0
+          Margins.Right = 0
+          Margins.Bottom = 0
           Align = alLeft
           BevelOuter = bvNone
           Color = 16580327
@@ -450,9 +467,20 @@ object frmVenda: TfrmVenda
             Width = 151
             Height = 26
             Align = alClient
+            Color = 15132390
             TabOrder = 0
             ExplicitHeight = 23
           end
+        end
+        object checkDiscount: TCheckBox
+          Left = 157
+          Top = 3
+          Width = 20
+          Height = 17
+          Checked = True
+          State = cbChecked
+          TabOrder = 3
+          OnClick = checkDiscountClick
         end
       end
       object grid: TDBGrid
@@ -461,61 +489,37 @@ object frmVenda: TfrmVenda
         Width = 828
         Height = 195
         Align = alBottom
+        BorderStyle = bsNone
         DataSource = ds
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        DrawingStyle = gdsGradient
+        FixedColor = clWindow
+        GradientEndColor = 6845186
+        GradientStartColor = 6845186
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Roboto'
+        Font.Style = [fsItalic]
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        ParentFont = False
         TabOrder = 5
         TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
+        TitleFont.Color = clWindow
         TitleFont.Height = -12
         TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
+        OnDrawColumnCell = gridDrawColumnCell
+        OnMouseWheelUp = gridMouseWheelUp
         Columns = <
           item
-            Expanded = False
-            FieldName = 'id_prod_vendido'
-            Title.Alignment = taCenter
-            Title.Caption = 'ID Produto'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -15
-            Title.Font.Name = 'Roboto Cn'
-            Title.Font.Style = []
-            Width = 120
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'nome_prod_vendido'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nome do Produto'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -15
-            Title.Font.Name = 'Roboto Cn'
-            Title.Font.Style = [fsBold]
-            Width = 150
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'preco_prod'
-            Title.Alignment = taCenter
-            Title.Caption = 'Pre'#231'o Produto'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -15
-            Title.Font.Name = 'Roboto Cn'
-            Title.Font.Style = [fsBold]
-            Width = 120
-            Visible = True
-          end
-          item
+            Alignment = taCenter
+            Color = clGhostwhite
             Expanded = False
             FieldName = 'nome_vendedor'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Vendedor'
             Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
+            Title.Font.Color = clWindow
             Title.Font.Height = -15
             Title.Font.Name = 'Roboto Cn'
             Title.Font.Style = [fsBold]
@@ -523,12 +527,29 @@ object frmVenda: TfrmVenda
             Visible = True
           end
           item
+            Alignment = taCenter
+            Color = clGhostwhite
             Expanded = False
-            FieldName = 'data_venda'
+            FieldName = 'nome_prod_vendido'
             Title.Alignment = taCenter
-            Title.Caption = 'Data Venda'
+            Title.Caption = 'Nome do Produto'
             Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
+            Title.Font.Color = clWindow
+            Title.Font.Height = -15
+            Title.Font.Name = 'Roboto Cn'
+            Title.Font.Style = [fsBold]
+            Width = 150
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Color = clGhostwhite
+            Expanded = False
+            FieldName = 'preco_prod'
+            Title.Alignment = taCenter
+            Title.Caption = 'Pre'#231'o Produto'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindow
             Title.Font.Height = -15
             Title.Font.Name = 'Roboto Cn'
             Title.Font.Style = [fsBold]
@@ -536,12 +557,44 @@ object frmVenda: TfrmVenda
             Visible = True
           end
           item
+            Alignment = taCenter
+            Color = clGhostwhite
+            Expanded = False
+            FieldName = 'id_prod_vendido'
+            Title.Alignment = taCenter
+            Title.Caption = 'ID Produto'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindow
+            Title.Font.Height = -15
+            Title.Font.Name = 'Roboto Cn'
+            Title.Font.Style = []
+            Width = 120
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Color = clGhostwhite
+            Expanded = False
+            FieldName = 'data_venda'
+            Title.Alignment = taCenter
+            Title.Caption = 'Data Venda'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindow
+            Title.Font.Height = -15
+            Title.Font.Name = 'Roboto Cn'
+            Title.Font.Style = [fsBold]
+            Width = 124
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Color = clGhostwhite
             Expanded = False
             FieldName = 'qntd_vendida'
             Title.Alignment = taCenter
             Title.Caption = 'Quantidade Vendida'
             Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
+            Title.Font.Color = clWindow
             Title.Font.Height = -15
             Title.Font.Name = 'Roboto Cn'
             Title.Font.Style = [fsBold]

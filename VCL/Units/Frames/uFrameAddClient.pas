@@ -3,13 +3,32 @@ unit uFrameAddClient;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Data.DB,
-  Vcl.ButtonStylesAttributes, Vcl.StyledButton;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.ExtCtrls,
+  Vcl.StdCtrls,
+  Vcl.Mask,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Stan.Async,
+  FireDAC.DApt,
+  FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,
+  Data.DB,
+  Vcl.ButtonStylesAttributes,
+  Vcl.StyledButton, Vcl.DBCtrls, Vcl.Menus;
 
 type
   TframeAddClient = class(TFrame)
@@ -54,6 +73,7 @@ type
     procedure maskCPFExit(Sender: TObject);
     procedure checkPadraoClick(Sender: TObject);
     procedure btnExcludeClick(Sender: TObject);
+    procedure edtNameChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -65,12 +85,15 @@ implementation
 {$R *.dfm}
 
 uses
-  System.Math, uDM, uMain, dlgConfirm;
+  System.Math,
+  uDM,
+  uMain,
+  dlgConfirm;
 
 function IsValidCPF(pCPF: string): Boolean;
 var
-  v: array [0 .. 1] of Word;
-  cpf: array [0 .. 10] of Byte;
+  v: array[0..1] of Word;
+  cpf: array[0..10] of Byte;
   I: Byte;
 begin
 
@@ -79,44 +102,44 @@ begin
   { Verificando se tem 11 caracteres }
   if Length(pCPF) <> 11 then
   begin
-  Exit;
+    Exit;
   end;
 
   { Conferindo se todos dígitos são iguais }
   if pCPF = StringOfChar('0', 11) then
-  Exit;
+    Exit;
 
   if pCPF = StringOfChar('1', 11) then
-  Exit;
+    Exit;
 
   if pCPF = StringOfChar('2', 11) then
-  Exit;
+    Exit;
 
   if pCPF = StringOfChar('3', 11) then
-  Exit;
+    Exit;
 
   if pCPF = StringOfChar('4', 11) then
-  Exit;
+    Exit;
 
   if pCPF = StringOfChar('5', 11) then
-  Exit;
+    Exit;
 
   if pCPF = StringOfChar('6', 11) then
-  Exit;
+    Exit;
 
   if pCPF = StringOfChar('7', 11) then
-  Exit;
+    Exit;
 
   if pCPF = StringOfChar('8', 11) then
-  Exit;
+    Exit;
 
   if pCPF = StringOfChar('9', 11) then
-  Exit;
+    Exit;
 
   try
 
     for I := 1 to 11 do
-    cpf[I - 1] := StrToInt(pCPF[I]);
+      cpf[I - 1] := StrToInt(pCPF[I]);
     // Nota: Calcula o primeiro dígito de verificação.
     v[0] := 10 * cpf[0] + 9 * cpf[1] + 8 * cpf[2];
     v[0] := v[0] + 7 * cpf[3] + 6 * cpf[4] + 5 * cpf[5];
@@ -133,17 +156,57 @@ begin
     // Nota: Verdadeiro se os dígitos de verificação são os esperados.
     Result := ((v[0] = cpf[9]) and (v[1] = cpf[10]));
 
-    except
+  except
     on E: Exception do
-    Result := False;
+      Result := False;
 
   end;
 end;
 
+procedure TframeAddClient.edtNameChange(Sender: TObject);
+var
+  qry: TFDQuery;
+begin
+
+  try
+
+    qry := TFDQuery.Create(nil);
+
+    if (edtName.Text <> EmptyStr) and Assigned(DM) then
+    begin
+
+      if DM.ConnDbERP.Connected = True then
+      begin
+
+        qry.Connection := DM.ConnDbERP;
+
+
+        qry.SQL.Text :=
+        'SELECT nome_cliente, id_cliente FROM clientes WHERE nome_cliente LIKE :value;';
+        qry.ParamByName('value').AsString := edtName.Text + '%';
+
+        qry.Open;
+
+        if not qry.IsEmpty then
+        begin
+          //dbGr
+        end;
+
+      end;
+
+    end;
+
+  finally
+
+    FreeAndNil(qry);
+
+  end;
+
+end;
+
 procedure TframeAddClient.maskCPFExit(Sender: TObject);
 var
-  rawCPF:
-  String;
+  rawCPF: string;
 begin
 
   rawCPF := StringReplace(maskCPF.Text, '.', '', [rfReplaceAll]);
@@ -189,14 +252,7 @@ procedure TframeAddClient.btnAddClick(Sender: TObject);
 var
   qry: TFDQuery;
   id: Integer;
-  nomeCliente,
-  cpfCliente,
-  celularCliente,
-  estadoCliente,
-  cidadeCliente,
-  bairroCliente:
-  String;
-
+  nomeCliente, cpfCliente, celularCliente, estadoCliente, cidadeCliente, bairroCliente: string;
 begin
 
   qry := TFDQuery.Create(nil);
@@ -227,10 +283,7 @@ begin
 
           qry.Close;
 
-          qry.SQL.Text :=
-          'INSERT INTO clientes(id_cliente, nome_cliente, cpf_cliente, ' +
-          'celular_cliente, data_adicionado) VALUES(nextval(''clientes_id_' +
-          'cliente_seq''::regclass), :nomeCliente, :cpfCliente, :celularCliente, :dataCliente);';
+          qry.SQL.Text := 'INSERT INTO clientes(id_cliente, nome_cliente, cpf_cliente, ' + 'celular_cliente, data_adicionado) VALUES(nextval(''clientes_id_' + 'cliente_seq''::regclass), :nomeCliente, :cpfCliente, :celularCliente, :dataCliente);';
 
           qry.ParamByName('nomeCliente').AsString := nomeCliente;
           qry.ParamByName('cpfCliente').AsString := cpfCliente;
@@ -330,12 +383,12 @@ begin
   end
   else
   begin
-    edtName.Text := '';
-    maskCPF.Text := '';
-    maskPhone.Text := '';
-    edtState.Text := '';
-    edtCity.Text := '';
-    edtDistrict.Text := '';
+    edtName.Text := EmptyStr;
+    maskCPF.Text := EmptyStr;
+    maskPhone.Text := EmptyStr;
+    edtState.Text := EmptyStr;
+    edtCity.Text := EmptyStr;
+    edtDistrict.Text := EmptyStr;
   end;
 
 end;

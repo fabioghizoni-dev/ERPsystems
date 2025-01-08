@@ -3,14 +3,38 @@ unit uFrameStock;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Mask,
-  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.DBCtrls, FireDAC.Stan.Intf,
-  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
-  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.UI.Intf,
-  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.PG,
-  FireDAC.Phys.PGDef, FireDAC.VCLUI.Wait;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.Mask,
+  Vcl.StdCtrls,
+  Vcl.ExtCtrls,
+  Vcl.DBCtrls,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Stan.Async,
+  FireDAC.DApt,
+  Data.DB,
+  FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,
+  FireDAC.UI.Intf,
+  FireDAC.Stan.Def,
+  FireDAC.Stan.Pool,
+  FireDAC.Phys,
+  FireDAC.Phys.PG,
+  FireDAC.Phys.PGDef,
+  FireDAC.VCLUI.Wait;
 
 type
   TframeStock = class(TFrame)
@@ -48,7 +72,8 @@ implementation
 {$R *.dfm}
 
 uses
-  uDM, uVenda;
+  uDM,
+  uVenda;
 
 procedure TframeStock.btnVendaClick(Sender: TObject);
 begin
@@ -57,15 +82,9 @@ end;
 
 procedure TframeStock.comboChange(Sender: TObject);
 var
-  qry:
-  TFDQuery;
-  produtoId:
-  Integer;
-  totalEstoque,
-  prodEstoque,
-  precoEstoque:
-  Double;
-
+  qry: TFDQuery;
+  produtoId: Integer;
+  totalEstoque, prodEstoque, precoEstoque: Double;
 begin
 
   if combo.ItemIndex = -1 then
@@ -110,8 +129,7 @@ begin
 
       produtoId := Integer(combo.Items.Objects[combo.ItemIndex]);
 
-      qry.SQL.Text := 'SELECT qntd_estoque, preco_unitario FROM produtos ' +
-                      'WHERE id_produto = :produto_id';
+      qry.SQL.Text := 'SELECT qntd_estoque, preco_unitario FROM produtos ' + 'WHERE id_produto = :produto_id';
       qry.ParamByName('produto_id').AsInteger := produtoId;
 
       qry.Open;

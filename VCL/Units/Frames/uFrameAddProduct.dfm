@@ -73,7 +73,7 @@ object frameAddProduct: TframeAddProduct
           Left = 0
           Top = 0
           Width = 124
-          Height = 25
+          Height = 19
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 206
@@ -87,7 +87,6 @@ object frameAddProduct: TframeAddProduct
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitHeight = 19
         end
       end
       object pnlEdts: TPanel
@@ -169,7 +168,7 @@ object frameAddProduct: TframeAddProduct
           Left = 0
           Top = 0
           Width = 95
-          Height = 25
+          Height = 19
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
@@ -183,7 +182,6 @@ object frameAddProduct: TframeAddProduct
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitHeight = 19
         end
       end
       object pnlEdts2: TPanel
@@ -394,7 +392,7 @@ object frameAddProduct: TframeAddProduct
           Left = 0
           Top = 0
           Width = 55
-          Height = 25
+          Height = 19
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
@@ -409,7 +407,6 @@ object frameAddProduct: TframeAddProduct
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitHeight = 19
         end
       end
     end
@@ -438,8 +435,8 @@ object frameAddProduct: TframeAddProduct
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 467
-        Height = 35
+        Width = 206
+        Height = 29
         Align = alClient
         Alignment = taCenter
         Caption = 'ADICIONAR PRODUTO'
@@ -450,8 +447,6 @@ object frameAddProduct: TframeAddProduct
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitWidth = 206
-        ExplicitHeight = 29
       end
     end
   end

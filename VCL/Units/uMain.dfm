@@ -18,13 +18,11 @@ object frmMain: TfrmMain
   Position = poScreenCenter
   RoundedCorners = rcOff
   StyleElements = [seFont]
-  StyleName = 'WinStyle'
+  StyleName = 'Windows'
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
-  OnMouseWheelDown = FormMouseWheelDown
-  OnMouseWheelUp = FormMouseWheelUp
   OnShow = FormShow
   TextHeight = 15
   object pnlClient: TPanel
@@ -412,54 +410,37 @@ object frmMain: TfrmMain
         ParentBackground = False
         ParentColor = False
         TabOrder = 2
-        Visible = False
         ExplicitLeft = 10
         ExplicitWidth = 730
         ExplicitHeight = 630
         inherited pnlAddClient: TPanel
           Width = 730
           Height = 630
-          StyleElements = [seFont, seClient, seBorder]
           ExplicitWidth = 730
           ExplicitHeight = 630
           inherited pnlMargins: TPanel
             Width = 654
             Height = 483
-            StyleElements = [seFont, seClient, seBorder]
             ExplicitWidth = 654
             ExplicitHeight = 483
             inherited pnlLbls: TPanel
               Width = 654
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 654
               inherited lblProduct: TLabel
                 Left = 430
                 Height = 25
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 430
               end
               inherited lblIDProd: TLabel
                 Height = 25
-                StyleElements = [seFont, seClient, seBorder]
               end
             end
             inherited pnlEdts: TPanel
               Width = 654
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 654
               inherited pnlCombo: TPanel
                 Left = 430
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 430
-                inherited combo: TComboBox
-                  StyleElements = [seFont, seClient, seBorder]
-                end
-              end
-              inherited pnlEdtID: TPanel
-                StyleElements = [seFont, seClient, seBorder]
-                inherited edtID: TEdit
-                  StyleElements = [seFont, seClient, seBorder]
-                end
               end
             end
             inherited btnVenda: TButton
@@ -470,48 +451,31 @@ object frmMain: TfrmMain
             end
             inherited pnlLbls2: TPanel
               Width = 654
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 654
               inherited lblPrice: TLabel
                 Height = 25
-                StyleElements = [seFont, seClient, seBorder]
               end
               inherited lblFull: TLabel
                 Left = 430
                 Height = 25
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 430
               end
             end
             inherited pnlEdts2: TPanel
               Width = 654
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 654
-              inherited pnlPrice: TPanel
-                StyleElements = [seFont, seClient, seBorder]
-                inherited edtPrice: TEdit
-                  StyleElements = [seFont, seClient, seBorder]
-                end
-              end
               inherited pnlEdtStock: TPanel
                 Left = 430
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 430
-                inherited edtStock: TEdit
-                  StyleElements = [seFont, seClient, seBorder]
-                end
               end
             end
           end
           inherited pnlTitle: TPanel
             Width = 570
-            StyleElements = [seFont, seClient, seBorder]
             ExplicitWidth = 570
             inherited lblTitle: TLabel
               Width = 564
               Height = 35
-              StyleElements = [seFont, seClient, seBorder]
-              ExplicitWidth = 564
             end
           end
         end
@@ -588,37 +552,50 @@ object frmMain: TfrmMain
           Margins.Right = 0
           Margins.Bottom = 0
           Align = alTop
+          BorderStyle = bsNone
           DataSource = DM.dtSrc
+          DrawingStyle = gdsGradient
+          FixedColor = clWindow
+          GradientEndColor = 6845186
+          GradientStartColor = 6845186
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Roboto'
+          Font.Style = [fsItalic]
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          ParentFont = False
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
+          TitleFont.Color = clWindow
           TitleFont.Height = -12
           TitleFont.Name = 'Segoe UI'
           TitleFont.Style = []
           OnCellClick = dbGridCellClick
+          OnDrawColumnCell = dbGridDrawColumnCell
           Columns = <
             item
-              Alignment = taCenter
+              Color = clGhostwhite
               Expanded = False
               FieldName = 'id_cliente'
               Title.Alignment = taCenter
               Title.Caption = 'ID Cliente'
               Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clBlack
+              Title.Font.Color = clWindow
               Title.Font.Height = -15
               Title.Font.Name = 'Roboto Cn'
               Title.Font.Style = [fsBold]
-              Width = 90
+              Width = 94
               Visible = True
             end
             item
+              Color = clGhostwhite
               Expanded = False
               FieldName = 'nome_cliente'
               Title.Alignment = taCenter
               Title.Caption = 'Nome Cliente'
               Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clBlack
+              Title.Font.Color = clWindow
               Title.Font.Height = -15
               Title.Font.Name = 'Roboto Cn'
               Title.Font.Style = [fsBold]
@@ -626,12 +603,13 @@ object frmMain: TfrmMain
               Visible = True
             end
             item
+              Color = clGhostwhite
               Expanded = False
               FieldName = 'cpf_cliente'
               Title.Alignment = taCenter
               Title.Caption = 'CPF Cliente'
               Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clBlack
+              Title.Font.Color = clWindow
               Title.Font.Height = -15
               Title.Font.Name = 'Roboto Cn'
               Title.Font.Style = [fsBold]
@@ -639,12 +617,13 @@ object frmMain: TfrmMain
               Visible = True
             end
             item
+              Color = clGhostwhite
               Expanded = False
               FieldName = 'celular_cliente'
               Title.Alignment = taCenter
               Title.Caption = 'Telefone Cliente'
               Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clBlack
+              Title.Font.Color = clWindow
               Title.Font.Height = -15
               Title.Font.Name = 'Roboto Cn'
               Title.Font.Style = [fsBold]
@@ -664,38 +643,51 @@ object frmMain: TfrmMain
           Margins.Bottom = 0
           Align = alBottom
           Anchors = [akLeft, akTop, akRight, akBottom]
+          BorderStyle = bsNone
           DataSource = DM.dtSrc3
+          DrawingStyle = gdsGradient
+          FixedColor = clWindow
+          GradientEndColor = 6845186
+          GradientStartColor = 6845186
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Roboto'
+          Font.Style = [fsItalic]
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          ParentFont = False
           TabOrder = 1
           TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
+          TitleFont.Color = clWindow
           TitleFont.Height = -12
           TitleFont.Name = 'Segoe UI'
           TitleFont.Style = []
           OnCellClick = dbGrid2CellClick
+          OnDrawColumnCell = dbGrid2DrawColumnCell
           Columns = <
             item
-              Alignment = taCenter
+              Color = clGhostwhite
               Expanded = False
               FieldName = 'id_produto'
               ReadOnly = True
               Title.Alignment = taCenter
               Title.Caption = 'ID Produto'
               Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clWindowText
+              Title.Font.Color = clWindow
               Title.Font.Height = -15
               Title.Font.Name = 'Roboto Cn'
               Title.Font.Style = [fsBold]
-              Width = 90
+              Width = 94
               Visible = True
             end
             item
+              Color = clGhostwhite
               Expanded = False
               FieldName = 'nome_produto'
               Title.Alignment = taCenter
               Title.Caption = 'Nome Produto'
               Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clWindowText
+              Title.Font.Color = clWindow
               Title.Font.Height = -15
               Title.Font.Name = 'Roboto Cn'
               Title.Font.Style = [fsBold]
@@ -704,12 +696,13 @@ object frmMain: TfrmMain
             end
             item
               Alignment = taLeftJustify
+              Color = clGhostwhite
               Expanded = False
               FieldName = 'preco_unitario'
               Title.Alignment = taCenter
               Title.Caption = 'Pre'#231'o Unit'#225'rio'
               Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clWindowText
+              Title.Font.Color = clWindow
               Title.Font.Height = -15
               Title.Font.Name = 'Roboto Cn'
               Title.Font.Style = [fsBold]
@@ -718,12 +711,13 @@ object frmMain: TfrmMain
             end
             item
               Alignment = taLeftJustify
+              Color = clGhostwhite
               Expanded = False
               FieldName = 'qntd_estoque'
               Title.Alignment = taCenter
               Title.Caption = 'Quantidade Estoque'
               Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clWindowText
+              Title.Font.Color = clWindow
               Title.Font.Height = -15
               Title.Font.Name = 'Roboto Cn'
               Title.Font.Style = [fsBold]
@@ -754,7 +748,6 @@ object frmMain: TfrmMain
         inherited pnlAddClient: TPanel
           Width = 730
           Height = 630
-          StyleElements = [seFont, seClient, seBorder]
           ExplicitWidth = 730
           ExplicitHeight = 630
           inherited pnlMargins: TPanel
@@ -764,7 +757,6 @@ object frmMain: TfrmMain
             Margins.Left = 50
             Margins.Right = 50
             Margins.Bottom = 50
-            StyleElements = [seFont, seClient, seBorder]
             ExplicitLeft = 50
             ExplicitWidth = 630
             ExplicitHeight = 471
@@ -773,14 +765,12 @@ object frmMain: TfrmMain
               Width = 630
               Padding.Left = 50
               Padding.Right = 204
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitTop = 150
               ExplicitWidth = 630
               inherited lblAmount: TLabel
                 AlignWithMargins = False
                 Left = 349
                 Margins.Right = 0
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 436
               end
               inherited lblProdID: TLabel
@@ -788,7 +778,6 @@ object frmMain: TfrmMain
                 Left = 50
                 Height = 25
                 Margins.Right = 0
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 50
               end
             end
@@ -798,41 +787,32 @@ object frmMain: TfrmMain
               Margins.Bottom = 80
               Padding.Left = 50
               Padding.Right = 50
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitTop = 175
               ExplicitWidth = 630
               inherited pnlAmount: TPanel
                 Left = 349
                 Width = 231
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 349
                 ExplicitWidth = 231
                 inherited edtAmount: TEdit
                   Width = 231
-                  StyleElements = [seFont, seClient, seBorder]
                   ExplicitWidth = 231
                 end
               end
               inherited pnlCod: TPanel
                 Left = 50
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 50
-                inherited edtCod: TEdit
-                  StyleElements = [seFont, seClient, seBorder]
-                end
               end
             end
             inherited pnlLbls2: TPanel
               Top = 296
               Width = 630
               Padding.Left = 50
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitTop = 296
               ExplicitWidth = 630
               inherited lblPrice: TLabel
                 Left = 50
                 Height = 25
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 50
               end
             end
@@ -840,18 +820,15 @@ object frmMain: TfrmMain
               Top = 321
               Width = 630
               Padding.Left = 50
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitTop = 321
               ExplicitWidth = 630
               inherited pnlPrice: TPanel
                 Left = 50
                 Width = 231
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 50
                 ExplicitWidth = 231
                 inherited edtPrice: TEdit
                   Width = 231
-                  StyleElements = [seFont, seClient, seBorder]
                   ExplicitWidth = 231
                 end
               end
@@ -859,7 +836,6 @@ object frmMain: TfrmMain
             inherited pnlBtns: TPanel
               Top = 430
               Width = 630
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitTop = 430
               ExplicitWidth = 630
               inherited btnAddProduct: TButton
@@ -886,7 +862,6 @@ object frmMain: TfrmMain
               Margins.Bottom = 80
               Padding.Left = 50
               Padding.Right = 50
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 630
               inherited pnlID: TPanel
                 Left = 349
@@ -895,12 +870,10 @@ object frmMain: TfrmMain
                 Margins.Top = 0
                 Margins.Right = 0
                 Margins.Bottom = 0
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 349
                 ExplicitWidth = 231
                 inherited edtDate: TEdit
                   Width = 231
-                  StyleElements = [seFont, seClient, seBorder]
                   ExplicitWidth = 231
                 end
                 inherited check: TCheckBox
@@ -910,35 +883,27 @@ object frmMain: TfrmMain
               end
               inherited pnlEdtProduct: TPanel
                 Left = 50
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 50
-                inherited edtProduct: TEdit
-                  StyleElements = [seFont, seClient, seBorder]
-                end
               end
             end
             inherited pnl2: TPanel
               Width = 630
               Padding.Left = 50
               Padding.Right = 56
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 630
               inherited lblDate: TLabel
                 Left = 349
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 436
               end
               inherited lblProduct: TLabel
                 Left = 50
                 Height = 25
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 50
               end
             end
           end
           inherited pnlTitle: TPanel
             Width = 570
-            StyleElements = [seFont, seClient, seBorder]
             ExplicitWidth = 570
             inherited lblTitle: TLabel
               AlignWithMargins = False
@@ -950,7 +915,6 @@ object frmMain: TfrmMain
               Margins.Top = 0
               Margins.Right = 0
               Margins.Bottom = 0
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitLeft = 0
               ExplicitTop = 0
             end
@@ -979,7 +943,6 @@ object frmMain: TfrmMain
         inherited pnlAddClient: TPanel
           Width = 730
           Height = 630
-          StyleElements = [seFont, seClient, seBorder]
           ExplicitWidth = 730
           ExplicitHeight = 630
           inherited pnlMargins: TPanel
@@ -989,19 +952,16 @@ object frmMain: TfrmMain
             Margins.Left = 50
             Margins.Right = 50
             Margins.Bottom = 50
-            StyleElements = [seFont, seClient, seBorder]
             ExplicitLeft = 50
             ExplicitWidth = 630
             ExplicitHeight = 471
             inherited pnlLbls: TPanel
               Width = 630
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 630
               inherited lblPhone: TLabel
                 Left = 457
                 Height = 25
                 Margins.Right = 115
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 457
               end
               inherited lblCPF: TLabel
@@ -1010,63 +970,51 @@ object frmMain: TfrmMain
                 Height = 25
                 Margins.Left = 161
                 Margins.Right = 170
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 202
-                ExplicitWidth = 85
               end
               inherited lblName: TLabel
                 Height = 25
-                StyleElements = [seFont, seClient, seBorder]
               end
             end
             inherited pnlEdts: TPanel
               Width = 630
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 630
               inherited pnlMaskCPF: TPanel
                 Left = 202
                 Width = 218
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 202
                 ExplicitWidth = 218
                 inherited maskCPF: TMaskEdit
                   Width = 208
                   Hint = 'CPF/CNPJ'
-                  StyleElements = [seFont, seClient, seBorder]
                   ExplicitWidth = 208
                 end
               end
               inherited pnlPhone: TPanel
                 Left = 457
                 Width = 173
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 457
                 ExplicitWidth = 173
                 inherited maskPhone: TMaskEdit
                   Width = 173
                   Hint = 'Telefone'
-                  StyleElements = [seFont, seClient, seBorder]
                   ExplicitWidth = 173
                 end
               end
               inherited pnlName: TPanel
                 Width = 160
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitWidth = 160
                 inherited edtName: TEdit
                   Width = 150
-                  StyleElements = [seFont, seClient, seBorder]
                   ExplicitWidth = 150
                 end
               end
             end
             inherited pnlLbls2: TPanel
               Width = 630
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 630
               inherited lblState: TLabel
                 Height = 25
-                StyleElements = [seFont, seClient, seBorder]
               end
               inherited lblCity: TLabel
                 Left = 202
@@ -1074,70 +1022,57 @@ object frmMain: TfrmMain
                 Height = 25
                 Margins.Left = 155
                 Margins.Right = 220
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 202
-                ExplicitWidth = 62
               end
               inherited lblDistrict: TLabel
                 Left = 484
                 Height = 25
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 484
               end
             end
             inherited pnlEdts2: TPanel
               Width = 630
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 630
               inherited pnlEdtCity: TPanel
                 Left = 202
                 Width = 219
                 Margins.Left = 42
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 202
                 ExplicitWidth = 219
                 inherited edtCity: TEdit
                   Width = 219
-                  StyleElements = [seFont, seClient, seBorder]
                   ExplicitWidth = 219
                 end
               end
               inherited pnlEdtDistrict: TPanel
                 Left = 457
                 Width = 173
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitLeft = 457
                 ExplicitWidth = 173
                 inherited edtDistrict: TEdit
                   Width = 173
-                  StyleElements = [seFont, seClient, seBorder]
                   ExplicitWidth = 173
                 end
               end
               inherited pnlEdtState: TPanel
                 Width = 160
-                StyleElements = [seFont, seClient, seBorder]
                 ExplicitWidth = 160
                 inherited edtState: TEdit
                   Width = 150
                   Hint = 'Telefone'
-                  StyleElements = [seFont, seClient, seBorder]
                   ExplicitWidth = 150
                 end
               end
             end
             inherited pnlLbls4: TPanel
               Width = 630
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 630
               inherited lblMemo: TLabel
                 Height = 25
-                StyleElements = [seFont, seClient, seBorder]
               end
             end
             inherited pnl5: TPanel
               Width = 630
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitWidth = 630
               inherited check: TCheckBox
                 Hint = 'F'#237'sica'
@@ -1149,24 +1084,24 @@ object frmMain: TfrmMain
             inherited pnlBtns: TPanel
               Top = 430
               Width = 630
-              StyleElements = [seFont, seClient, seBorder]
               ExplicitTop = 430
               ExplicitWidth = 630
               inherited btnAdd: TButton
                 Left = 367
+                Cursor = crHandPoint
                 ExplicitLeft = 367
+              end
+              inherited btnExclude: TButton
+                Cursor = crHandPoint
               end
             end
           end
           inherited pnlTitle: TPanel
             Width = 570
-            StyleElements = [seFont, seClient, seBorder]
             ExplicitWidth = 570
             inherited lblTitle: TLabel
               Width = 564
               Height = 35
-              StyleElements = [seFont, seClient, seBorder]
-              ExplicitWidth = 564
             end
           end
         end

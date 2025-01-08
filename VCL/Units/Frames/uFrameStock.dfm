@@ -48,7 +48,7 @@ object frameStock: TframeStock
           Left = 363
           Top = 0
           Width = 124
-          Height = 25
+          Height = 19
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 100
@@ -62,14 +62,12 @@ object frameStock: TframeStock
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitLeft = 392
-          ExplicitHeight = 19
         end
         object lblIDProd: TLabel
           Left = 0
           Top = 0
           Width = 72
-          Height = 25
+          Height = 19
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
@@ -83,7 +81,6 @@ object frameStock: TframeStock
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitHeight = 19
         end
       end
       object pnlEdts: TPanel
@@ -201,7 +198,7 @@ object frameStock: TframeStock
           Left = 0
           Top = 0
           Width = 115
-          Height = 25
+          Height = 19
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 0
@@ -215,14 +212,13 @@ object frameStock: TframeStock
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitHeight = 19
         end
         object lblFull: TLabel
           AlignWithMargins = True
           Left = 363
           Top = 0
           Width = 114
-          Height = 25
+          Height = 19
           Margins.Left = 0
           Margins.Top = 0
           Margins.Right = 110
@@ -236,7 +232,6 @@ object frameStock: TframeStock
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitHeight = 19
         end
       end
       object pnlEdts2: TPanel
@@ -332,8 +327,8 @@ object frameStock: TframeStock
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 497
-        Height = 35
+        Width = 92
+        Height = 29
         Align = alClient
         Alignment = taCenter
         Caption = 'ESTOQUE'
@@ -344,8 +339,6 @@ object frameStock: TframeStock
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitWidth = 92
-        ExplicitHeight = 29
       end
     end
   end
